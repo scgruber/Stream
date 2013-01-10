@@ -1,4 +1,4 @@
-class Streams < Shoes
+class Stream < Shoes
   url '/',        :index
   url '/w/(\w+)', :entry
   url '/all',     :all
@@ -6,7 +6,7 @@ class Streams < Shoes
   DROPS = Hash.new
 
   def index
-    stack do
+    stack :margin => "5" do
       title "Just start writing..."
       para "Press enter to add to the stream"
       @box = edit_line :width => "100%"
@@ -24,7 +24,7 @@ class Streams < Shoes
 
   def entry(str)
     t = DROPS.fetch(str, [])
-    stack do
+    stack :margin => "5" do
       title str
       @box = edit_line :width => "100%"
       keypress do |k|
@@ -50,7 +50,7 @@ class Streams < Shoes
   end
 
   def all
-    stack do
+    stack :margin => "5" do
       title "The whole stream:"
       DROPS.each do |k, d|
         flow :width => "100%" do
@@ -71,6 +71,6 @@ class Streams < Shoes
   end
 end
 
-Streams
+Stream
 
-Shoes.app :title => "Streams of Consciousness"
+Shoes.app :title => "Stream"
